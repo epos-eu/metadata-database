@@ -9,6 +9,9 @@ jobs:
     permissions: write-all
     steps:
       - uses: actions/checkout@v2
+      - name: Pre-build
+        run: |
+          ./initdb.sh
       - name: Docker build
         run: |
           docker build  -f Dockerfile.build  -t epos/metadata-database:latest .
