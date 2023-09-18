@@ -1014,8 +1014,8 @@ ALTER TABLE IF EXISTS public.webservice_supportedoperation
 CREATE TABLE IF NOT EXISTS public.webservice_relation
 (
     instance_webservice_id character varying(1024) NOT NULL,
-    meta_id character varying(1024) NOT NULL,
-    PRIMARY KEY (instance_webservice_id, meta_id)
+    instance_webservice_id_0 character varying(1024) NOT NULL,
+    PRIMARY KEY (instance_webservice_id, instance_webservice_id_0)
 );
 
 ALTER TABLE IF EXISTS public.webservice_relation
@@ -1023,9 +1023,9 @@ ALTER TABLE IF EXISTS public.webservice_relation
     REFERENCES public.webservice (instance_id);
 
 ALTER TABLE IF EXISTS public.webservice_relation
-    ADD FOREIGN KEY (meta_id)
-    REFERENCES public.edm_entity_id (meta_id);
-
+    ADD FOREIGN KEY (instance_webservice_id_0)
+    REFERENCES public.webservice (instance_id);
+    
 CREATE TABLE IF NOT EXISTS public.operation_returns
 (
     id character varying(1024) NOT NULL,
