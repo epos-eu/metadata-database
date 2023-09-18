@@ -954,7 +954,6 @@ ALTER TABLE IF EXISTS public.webservice_spatial
     ADD FOREIGN KEY (instance_webservice_id)
     REFERENCES public.webservice (instance_id);
 
-
 CREATE TABLE IF NOT EXISTS public.operation
 (
     uid character varying NOT NULL,
@@ -1011,6 +1010,21 @@ ALTER TABLE IF EXISTS public.webservice_supportedoperation
 ALTER TABLE IF EXISTS public.webservice_supportedoperation
     ADD FOREIGN KEY (instance_operation_id)
     REFERENCES public.operation (instance_id);
+
+CREATE TABLE IF NOT EXISTS public.webservice_relation
+(
+    instance_webservice_id character varying(1024) NOT NULL,
+    meta_id character varying(1024) NOT NULL,
+    PRIMARY KEY (instance_webservice_id, meta_id)
+);
+
+ALTER TABLE IF EXISTS public.webservice_relation
+    ADD FOREIGN KEY (instance_webservice_id)
+    REFERENCES public.equipment (instance_id);
+
+ALTER TABLE IF EXISTS public.instance_webservice_id
+    ADD FOREIGN KEY (meta_id)
+    REFERENCES public.edm_entity_id (meta_id);
 
 
 CREATE TABLE IF NOT EXISTS public.operation_returns
