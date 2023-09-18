@@ -1020,12 +1020,11 @@ CREATE TABLE IF NOT EXISTS public.webservice_relation
 
 ALTER TABLE IF EXISTS public.webservice_relation
     ADD FOREIGN KEY (instance_webservice_id)
-    REFERENCES public.equipment (instance_id);
+    REFERENCES public.webservice (instance_id);
 
-ALTER TABLE IF EXISTS public.instance_webservice_id
+ALTER TABLE IF EXISTS public.webservice_relation
     ADD FOREIGN KEY (meta_id)
     REFERENCES public.edm_entity_id (meta_id);
-
 
 CREATE TABLE IF NOT EXISTS public.operation_returns
 (
