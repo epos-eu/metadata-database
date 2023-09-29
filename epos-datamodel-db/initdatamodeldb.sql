@@ -798,23 +798,6 @@ ALTER TABLE IF EXISTS public.distribution_downloadurl
     ADD FOREIGN KEY (instance_distribution_id)
     REFERENCES public.distribution (instance_id);
 
-
-CREATE TABLE IF NOT EXISTS public.distribution_accessurl
-(
-    instance_operation_id character varying(1024) NOT NULL,
-    instance_distribution_id character varying(1024) NOT NULL,
-    PRIMARY KEY (instance_distribution_id, instance_operation_id)
-);
-
-ALTER TABLE IF EXISTS public.distribution_accessurl
-    ADD FOREIGN KEY (instance_distribution_id)
-    REFERENCES public.distribution (instance_id);
-
-ALTER TABLE IF EXISTS public.distribution_accessurl
-    ADD FOREIGN KEY (instance_operation_id)
-    REFERENCES public.operation (instance_id);
-
-
 CREATE TABLE IF NOT EXISTS public.webservice
 (
     uid character varying(1024) NOT NULL,
@@ -1013,6 +996,23 @@ ALTER TABLE IF EXISTS public.webservice_supportedoperation
 ALTER TABLE IF EXISTS public.webservice_supportedoperation
     ADD FOREIGN KEY (instance_operation_id)
     REFERENCES public.operation (instance_id);
+
+
+CREATE TABLE IF NOT EXISTS public.distribution_accessurl
+(
+    instance_operation_id character varying(1024) NOT NULL,
+    instance_distribution_id character varying(1024) NOT NULL,
+    PRIMARY KEY (instance_distribution_id, instance_operation_id)
+);
+
+ALTER TABLE IF EXISTS public.distribution_accessurl
+    ADD FOREIGN KEY (instance_distribution_id)
+    REFERENCES public.distribution (instance_id);
+
+ALTER TABLE IF EXISTS public.distribution_accessurl
+    ADD FOREIGN KEY (instance_operation_id)
+    REFERENCES public.operation (instance_id);
+
 
 CREATE TABLE IF NOT EXISTS public.webservice_relation
 (
