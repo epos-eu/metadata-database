@@ -803,7 +803,7 @@ CREATE TABLE IF NOT EXISTS public.distribution_accessurl
 (
     instance_operation_id character varying(1024) NOT NULL,
     instance_distribution_id character varying(1024) NOT NULL,
-    PRIMARY KEY (instance_webservice_id, instance_operation_id)
+    PRIMARY KEY (instance_distribution_id, instance_operation_id)
 );
 
 ALTER TABLE IF EXISTS public.distribution_accessurl
