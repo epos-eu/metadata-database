@@ -801,15 +801,18 @@ ALTER TABLE IF EXISTS public.distribution_downloadurl
 
 CREATE TABLE IF NOT EXISTS public.distribution_accessurl
 (
-    id character varying(1024) NOT NULL,
-    accessURL character varying(1024) NOT NULL,
+    instance_operation_id character varying(1024) NOT NULL,
     instance_distribution_id character varying(1024) NOT NULL,
-    PRIMARY KEY (id)
+    PRIMARY KEY (instance_webservice_id, instance_operation_id)
 );
 
 ALTER TABLE IF EXISTS public.distribution_accessurl
     ADD FOREIGN KEY (instance_distribution_id)
     REFERENCES public.distribution (instance_id);
+
+ALTER TABLE IF EXISTS public.distribution_accessurl
+    ADD FOREIGN KEY (instance_operation_id)
+    REFERENCES public.operation (instance_id);
 
 
 CREATE TABLE IF NOT EXISTS public.webservice
