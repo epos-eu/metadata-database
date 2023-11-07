@@ -27,6 +27,7 @@ CREATE TABLE IF NOT EXISTS public.resource_item
     addition_time timestamptz NOT NULL,
     resource_uid character varying(1024) NOT NULL,
     resource_url character varying(1024),
+    resource_version character varying(1024),
     file_name character varying(1024),
     file_type character varying(1024),
     PRIMARY KEY (id)
