@@ -1,6 +1,6 @@
 BEGIN;
 
-CREATE TYPE processing_unit_status AS ENUM ('READY', 'NOT_READY');
+CREATE TYPE processing_unit_status AS ENUM ('READY', 'CREATING', 'UPDATING', 'DELETING', 'NOT_READY');
 
 CREATE CAST (varchar AS processing_unit_status) WITH INOUT AS IMPLICIT;
 
