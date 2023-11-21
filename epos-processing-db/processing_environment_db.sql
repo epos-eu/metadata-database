@@ -2,12 +2,14 @@ BEGIN;
 
 CREATE TYPE processing_unit_status AS ENUM ('READY', 'CREATING', 'UPDATING', 'DELETING', 'NOT_READY');
 
+CREATE TYPE processing_item_status AS ENUM ('LOADED', 'NOT_LOADED');
+
 CREATE CAST (varchar AS processing_unit_status) WITH INOUT AS IMPLICIT;
 
 CREATE TABLE IF NOT EXISTS public.processing_unit
 (
     id character varying(1024) NOT NULL,
-    name character varying(1024) NOT NULL,
+    name character varying(1024) NOT NULL
     environment_unit_url character varying(1024),
     environment_unit_id character varying(1024),
     description text,
@@ -30,6 +32,7 @@ CREATE TABLE IF NOT EXISTS public.resource_item
     resource_version character varying(1024),
     file_name character varying(1024),
     file_type character varying(1024),
+    status processing_item_status NOT NULL,
     PRIMARY KEY (id)
 );
 
