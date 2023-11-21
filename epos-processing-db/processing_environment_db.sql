@@ -31,6 +31,7 @@ CREATE TABLE IF NOT EXISTS public.resource_item
     resource_url character varying(1024),
     resource_version character varying(1024),
     file_name character varying(1024),
+    file_description text,
     file_type character varying(1024),
     status processing_item_status NOT NULL,
     PRIMARY KEY (id)
