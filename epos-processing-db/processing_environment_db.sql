@@ -6,6 +6,8 @@ CREATE TYPE processing_item_status AS ENUM ('LOADED', 'NOT_LOADED');
 
 CREATE CAST (varchar AS processing_unit_status) WITH INOUT AS IMPLICIT;
 
+CREATE CAST (varchar AS processing_item_status) WITH INOUT AS IMPLICIT;
+
 CREATE TABLE IF NOT EXISTS public.processing_unit
 (
     id character varying(1024) NOT NULL,
