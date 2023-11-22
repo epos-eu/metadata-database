@@ -9,7 +9,7 @@ CREATE CAST (varchar AS processing_unit_status) WITH INOUT AS IMPLICIT;
 CREATE TABLE IF NOT EXISTS public.processing_unit
 (
     id character varying(1024) NOT NULL,
-    name character varying(1024) NOT NULL
+    name character varying(1024) NOT NULL,
     environment_unit_url character varying(1024),
     environment_unit_id character varying(1024),
     description text,
