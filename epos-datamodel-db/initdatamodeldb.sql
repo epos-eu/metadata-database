@@ -98,8 +98,9 @@ CREATE TABLE IF NOT EXISTS public.category_scheme
 (
     id character varying(1024) NOT NULL,
     uid character varying(1024) NOT NULL,
-    description text,
     name character varying(1024),
+    code character varying(1024),
+    description text,
     PRIMARY KEY (id)
 );
 
