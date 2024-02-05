@@ -101,6 +101,10 @@ CREATE TABLE IF NOT EXISTS public.category_scheme
     name character varying(1024),
     code character varying(1024),
     description text,
+    logo character varying(1024),
+    homepage character varying(1024),
+    color character varying(1024),
+    orderitemnumber character varying(1024),
     PRIMARY KEY (id)
 );
 
@@ -133,6 +137,21 @@ ALTER TABLE IF EXISTS public.ispartof_category
 
 ALTER TABLE IF EXISTS public.ispartof_category
     ADD FOREIGN KEY (category2_id)
+    REFERENCES public.category (id);
+
+CREATE TABLE IF NOT EXISTS public.hastopconcept
+(
+    category_scheme_id character varying(1024) NOT NULL,
+    category_id character varying(1024) NOT NULL,
+    PRIMARY KEY (category_scheme_id, category_id)
+);
+
+ALTER TABLE IF EXISTS public.hastopconcept
+    ADD FOREIGN KEY (category_scheme_id)
+    REFERENCES public.category_scheme (id);
+
+ALTER TABLE IF EXISTS public.hastopconcept
+    ADD FOREIGN KEY (category_id)
     REFERENCES public.category (id);
 
 
