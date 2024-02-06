@@ -485,6 +485,21 @@ ALTER TABLE IF EXISTS public.contactpoint_organization
     ADD FOREIGN KEY (instance_contactpoint_id)
     REFERENCES public.contactpoint (instance_id);
 
+CREATE TABLE IF NOT EXISTS public.organization_owner
+(
+    meta_id character varying(1024) NOT NULL,
+    instance_organization_id character varying(1024) NOT NULL,
+    PRIMARY KEY (meta_id, instance_organization_id)
+);
+
+ALTER TABLE IF EXISTS public.organization_owner
+    ADD FOREIGN KEY (instance_organization_id)
+    REFERENCES public.organization (instance_id);
+
+ALTER TABLE IF EXISTS public.organization_owner
+    ADD FOREIGN KEY (meta_id)
+    REFERENCES public.edm_entity_id (meta_id);
+
 
 CREATE TABLE IF NOT EXISTS public.dataproduct
 (
@@ -1616,9 +1631,11 @@ ALTER TABLE IF EXISTS public.facility
 
 create index idx_facility_state on public.facility(state);
 
+
 ALTER TABLE IF EXISTS public.facility
     ADD FOREIGN KEY (owner)
     REFERENCES public.edm_entity_id (meta_id);
+
 
 ALTER TABLE IF EXISTS public.facility
     ADD FOREIGN KEY (meta_id)
@@ -1696,7 +1713,6 @@ ALTER TABLE IF EXISTS public.facility_facility
 ALTER TABLE IF EXISTS public.facility_facility
     ADD FOREIGN KEY (instance_facility2_id)
     REFERENCES public.facility (instance_id);
-
 
 CREATE TABLE IF NOT EXISTS public.facility_category
 (
