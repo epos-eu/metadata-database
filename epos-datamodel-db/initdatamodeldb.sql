@@ -979,7 +979,7 @@ CREATE TABLE IF NOT EXISTS public.operation
 (
     uid character varying NOT NULL,
     method character varying(1024),
-    template character text,
+    template text,
     supportedoperation character varying(1024),
     fileprovenance character varying(1024),
 
