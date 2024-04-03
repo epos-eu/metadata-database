@@ -18,3 +18,6 @@ CREATE TABLE plugin_relations (
 	relation_id VARCHAR(1024) NOT NULL,
 	relation_type VARCHAR(1024) NOT NULL
 );
+
+
+END;
