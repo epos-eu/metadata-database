@@ -1,8 +1,8 @@
 BEGIN;
 
 CREATE TABLE plugin_header (
-	id SERIAL PRIMARY KEY,
-	plugin_id VARCHAR(100) NOT NULL,
+	id character varying(1024) NOT NULL PRIMARY KEY,
+	plugin_id VARCHAR(1024) NOT NULL,
 	version VARCHAR(20) NOT NULL,
 	install_location VARCHAR(300) NOT NULL,
 	proxy_type VARCHAR(25) NOT NULL,
@@ -16,7 +16,7 @@ CREATE TABLE plugin_header (
 );
 
 CREATE TABLE plugin_status (
-	hdr_id INTEGER NOT NULL PRIMARY KEY,
+	hdr_id character varying(1024) NOT NULL PRIMARY KEY,
 	installed BOOLEAN NOT NULL DEFAULT FALSE,
 	enabled BOOLEAN NOT NULL DEFAULT FALSE,
 	CONSTRAINT fk_hdr_id
@@ -25,17 +25,17 @@ CREATE TABLE plugin_status (
 );
 
 CREATE TABLE repo_plugin_artifact (
-	id SERIAL PRIMARY KEY,
-	hdr_id INTEGER NOT NULL,
-	artifact_location VARCHAR(300) NOT NULL,
+	id character varying(1024) NOT NULL PRIMARY KEY,
+	hdr_id character varying(1024) NOT NULL,
+	artifact_location VARCHAR(1024) NOT NULL,
 	CONSTRAINT fk_hdr_id
 		FOREIGN KEY(hdr_id)
 			REFERENCES plugin_header(id)
 );
 
 CREATE TABLE conv_desc (
-	id SERIAL PRIMARY KEY,
-	hdr_id INTEGER NOT NULL,
+	id character varying(1024) NOT NULL PRIMARY KEY,
+	hdr_id character varying(1024) NOT NULL,
 	req_type VARCHAR(500) NOT NULL,
 	req_content_type VARCHAR(100) NOT NULL,
 	resp_content_type VARCHAR(100) NOT NULL,
@@ -46,10 +46,10 @@ CREATE TABLE conv_desc (
 );
 
 CREATE TABLE conv_invocation_desc (
-	id SERIAL PRIMARY KEY,
-	conv_desc_id INTEGER NOT NULL,
+	id character varying(1024) NOT NULL PRIMARY KEY,
+	conv_desc_id character varying(1024) NOT NULL,
 	ordinal INTEGER NOT NULL,
-	invocation_detail VARCHAR(300) NOT NULL,
+	invocation_detail VARCHAR(1024) NOT NULL,
 	UNIQUE(ordinal, conv_desc_id),
 	CONSTRAINT fk_conv_desc_id
 		FOREIGN KEY(conv_desc_id)
