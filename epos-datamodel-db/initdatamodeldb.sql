@@ -1608,6 +1608,7 @@ CREATE TABLE IF NOT EXISTS public.facility
     type character(1024),
     address_id character varying(1024),
     owner character varying(1024),
+    keywords text,
     fileprovenance character varying(1024),
 
     instance_id character varying(1024),
@@ -1751,6 +1752,7 @@ CREATE TABLE IF NOT EXISTS public.equipment
     name character varying(1024),
     type character(1024),
     manufacturer character varying(1024),
+    keywords text,
     pageURL character varying(1024),
     filter character varying(1024),
     dynamicrange character varying(1024),
