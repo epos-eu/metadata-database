@@ -1603,6 +1603,7 @@ ALTER TABLE IF EXISTS public.publication_identifier
 CREATE TABLE IF NOT EXISTS public.facility
 (
     uid character varying(1024) NOT NULL,
+    identifier character varying(1024),
     description text,
     title character varying(1024),
     type character(1024),
