@@ -23,8 +23,8 @@ done
 COUNT=$((COUNT + 1))
 
 for x in epos-datamodel-db/*; do
-echo "\connect cerif;" > $INITCERIF/$((COUNT))_${x##*/}
-cat  $x >> $INITCERIF/$((COUNT))_${x##*/}
+echo "\connect cerif;" > $INITCERIF/${x##*/}
+cat  $x >> $INITCERIF/${x##*/}
 done
 COUNT=$((COUNT + 1))
 
