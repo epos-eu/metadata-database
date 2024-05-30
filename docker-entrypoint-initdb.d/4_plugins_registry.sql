@@ -1,3 +1,4 @@
+\connect cerif;
 BEGIN;
 
 CREATE TABLE plugin_header (

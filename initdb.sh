@@ -23,18 +23,12 @@ done
 COUNT=$((COUNT + 1))
 
 for x in epos-datamodel-db/*; do
-echo "\connect cerif;" > $INITCERIF/${x##*/}
-cat  $x >> $INITCERIF/${x##*/}
+echo "\connect cerif;" > $INITCERIF/$((COUNT))_${x##*/}
+cat  $x >> $INITCERIF/$((COUNT))_${x##*/}
 done
 COUNT=$((COUNT + 1))
 
 echo ${ADMIN_INSERT} > $INITCERIF/$((COUNT))_admins.sql
-COUNT=$((COUNT + 1))
-
-for x in epos-datamodel-semantic/*; do
-echo "\connect cerif;" > $INITCERIF/$((COUNT))_${x##*/}
-cat  $x >> $INITCERIF/$((COUNT))_${x##*/}
-done
 COUNT=$((COUNT + 1))
 
 for x in epos-processing-db/*; do
@@ -54,6 +48,3 @@ echo "\connect cerif;" > $INITCERIF/$((COUNT))_${x##*/}
 cat  $x >> $INITCERIF/$((COUNT))_${x##*/}
 done
 COUNT=$((COUNT + 1))
-
-
-
