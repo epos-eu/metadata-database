@@ -527,9 +527,7 @@ CREATE TABLE IF NOT EXISTS public.distribution
     type character varying(1024),
     format character varying(1024),
     license character varying(1024),
-    access_service character varying(1024),
     datapolicy character varying(1024),
-    conformsto character varying(1024),
     PRIMARY KEY (instance_id),
     FOREIGN KEY (version_id) REFERENCES public.versioningstatus (version_id)
 );
@@ -572,7 +570,7 @@ CREATE TABLE IF NOT EXISTS public.distribution_description
 );
 
 
-CREATE TABLE IF NOT EXISTS public.distribution_element /* downloadurl */
+CREATE TABLE IF NOT EXISTS public.distribution_element /* downloadurl, accessurl */
 (
     distribution_instance_id character varying(100) NOT NULL,
     element_instance_id character varying(100) NOT NULL,
@@ -603,6 +601,16 @@ CREATE TABLE IF NOT EXISTS public.webservice
     aaaitypes character varying(1024),
     PRIMARY KEY (instance_id),
     FOREIGN KEY (version_id) REFERENCES public.versioningstatus (version_id)
+);
+
+/* conforms to or dataservice */
+CREATE TABLE IF NOT EXISTS public.webservice_distribution
+(
+    distribution_instance_id character varying(100) NOT NULL,
+    webservice_instance_id character varying(100) NOT NULL,
+    PRIMARY KEY (webservice_instance_id, distribution_instance_id),
+    FOREIGN KEY (webservice_instance_id) REFERENCES public.webservice (instance_id),
+    FOREIGN KEY (distribution_instance_id) REFERENCES public.distribution (instance_id)
 );
 
 CREATE TABLE IF NOT EXISTS public.webservice_identifier
