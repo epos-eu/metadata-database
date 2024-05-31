@@ -114,7 +114,7 @@ CREATE TABLE IF NOT EXISTS public.element
     uid character varying(100),
     version_id character varying(100),
     type elementtype,
-    value character varying(1024) NOT NULL,
+    value text NOT NULL,
     PRIMARY KEY (instance_id),
     FOREIGN KEY (version_id) REFERENCES public.versioningstatus (version_id)
 );
