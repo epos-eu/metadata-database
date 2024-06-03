@@ -6,6 +6,10 @@ CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 /* COMMON */
 CREATE TYPE statustype AS ENUM ('ARCHIVED', 'DISCARDED', 'DRAFT', 'SUBMITTED', 'PUBLISHED');
 
+CREATE TYPE roletype AS ENUM ('ADMIN', 'REVIEWER', 'VIEWER', 'EDITOR');
+
+CREATE TYPE requeststatustype AS ENUM ('ACCEPTED', 'PENDING', 'NONE');
+
 CREATE TABLE IF NOT EXISTS public.versioningstatus
 (
     version_id character varying(100) NOT NULL,
@@ -43,14 +47,6 @@ CREATE TABLE IF NOT EXISTS public.user
     PRIMARY KEY (auth_identifier)
 );
 
-CREATE TABLE IF NOT EXISTS public.role
-(
-    id character varying(100) NOT NULL,
-    name character varying(1024),
-    description TEXT,
-    PRIMARY KEY (id)
-);
-
 CREATE TABLE IF NOT EXISTS public.metadata_group
 (
     id character varying(100) NOT NULL,
@@ -61,12 +57,13 @@ CREATE TABLE IF NOT EXISTS public.metadata_group
 
 CREATE TABLE IF NOT EXISTS public.metadata_group_user
 (
+    id character varying(100) NOT NULL,
     auth_identifier character varying(100) NOT NULL,
     group_id character varying(100),
-    role_id character varying(100),
-    PRIMARY KEY (auth_identifier, group_id),
+    request_status requeststatustype,
+    role roletype,
+    PRIMARY KEY (id),
     FOREIGN KEY (group_id) REFERENCES public.metadata_group (id) ON DELETE CASCADE ON UPDATE CASCADE,
-    FOREIGN KEY (role_id) REFERENCES public.role (id) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (auth_identifier) REFERENCES public.user (auth_identifier) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
@@ -79,14 +76,6 @@ CREATE TABLE IF NOT EXISTS public.authorization_group
     FOREIGN KEY (group_id) REFERENCES public.metadata_group (id) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (meta_id) REFERENCES public.edm_entity_id (meta_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
-
-/* INSERT INITIAL DATA */
-INSERT INTO public.role (id, name, description)
-VALUES
-    (uuid_generate_v4(), 'ADMIN', 'ADMIN User'),
-    (uuid_generate_v4(), 'REVIEWER', 'REVIEWER User'),
-    (uuid_generate_v4(), 'EDITOR', 'EDITOR User'),
-    (uuid_generate_v4(), 'VIEWER', 'VIEWER User');
 
 INSERT INTO public.metadata_group (id, name, description)
 VALUES
