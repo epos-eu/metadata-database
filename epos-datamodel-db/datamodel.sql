@@ -9,11 +9,22 @@ CREATE TYPE roletype AS ENUM ('ADMIN', 'REVIEWER', 'VIEWER', 'EDITOR');
 
 CREATE TYPE requeststatustype AS ENUM ('ACCEPTED', 'PENDING', 'NONE');
 
+CREATE TYPE ontologytype AS ENUM ('BASE', 'MAPPING');
+
+CREATE TABLE IF NOT EXISTS public.ontologies
+(
+    id character varying(100) NOT NULL,
+    ontologyname character varying(1024),
+    ontologybase64 text,
+    PRIMARY KEY (id)
+);
+
 CREATE TABLE IF NOT EXISTS public.versioningstatus
 (
     version_id character varying(100) NOT NULL,
     instance_id character varying(100),
     meta_id character varying(100),
+    uid character varying(100),
     instance_change_id character varying(1024),
     provenance character varying(1024),
     editor_id character varying(1024),
@@ -37,7 +48,7 @@ CREATE TABLE IF NOT EXISTS public.edm_entity_id
 
 /* ROLES AND GROUPS */
 
-CREATE TABLE IF NOT EXISTS public.user
+CREATE TABLE IF NOT EXISTS public.metadata_user
 (
     auth_identifier character varying(1024) NOT NULL,
     familyname character varying(1024),
@@ -63,7 +74,7 @@ CREATE TABLE IF NOT EXISTS public.metadata_group_user
     role roletype,
     PRIMARY KEY (id),
     FOREIGN KEY (group_id) REFERENCES public.metadata_group (id) ON DELETE CASCADE ON UPDATE CASCADE,
-    FOREIGN KEY (auth_identifier) REFERENCES public.user (auth_identifier) ON DELETE CASCADE ON UPDATE CASCADE
+    FOREIGN KEY (auth_identifier) REFERENCES public.metadata_user (auth_identifier) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS public.authorization_group
@@ -88,8 +99,23 @@ CREATE TABLE IF NOT EXISTS public.identifier
     meta_id character varying(100),
     uid character varying(100),
     version_id character varying(100),
-    type character varying(1024) NOT NULL,
-    value character varying(1024) NOT NULL,
+    type character varying(1024),
+    value character varying(1024),
+    PRIMARY KEY (instance_id),
+    FOREIGN KEY (version_id) REFERENCES public.versioningstatus (version_id)
+);
+
+
+/* QUANTITATIVEVALUE */
+
+CREATE TABLE IF NOT EXISTS public.quantitativevalue
+(
+    instance_id character varying(100) NOT NULL,
+    meta_id character varying(100),
+    uid character varying(100),
+    version_id character varying(100),
+    unitcode character varying(1024),
+    value character varying(1024),
     PRIMARY KEY (instance_id),
     FOREIGN KEY (version_id) REFERENCES public.versioningstatus (version_id)
 );
@@ -102,7 +128,7 @@ CREATE TABLE IF NOT EXISTS public.element
     meta_id character varying(100),
     uid character varying(100),
     version_id character varying(100),
-    type elementtype,
+    type character varying(100),
     value text NOT NULL,
     PRIMARY KEY (instance_id),
     FOREIGN KEY (version_id) REFERENCES public.versioningstatus (version_id)
