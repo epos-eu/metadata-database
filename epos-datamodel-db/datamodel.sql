@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS public.versioningstatus
     version_id character varying(100) NOT NULL,
     instance_id character varying(100),
     meta_id character varying(100),
-    uid character varying(100),
+    uid character varying(1024),
     instance_change_id character varying(1024),
     provenance character varying(1024),
     editor_id character varying(1024),
@@ -61,7 +61,7 @@ CREATE TABLE IF NOT EXISTS public.metadata_group
 (
     id character varying(100) NOT NULL,
     name character varying(1024),
-    description TEXT,
+    description text,
     PRIMARY KEY (id)
 );
 
@@ -97,7 +97,7 @@ CREATE TABLE IF NOT EXISTS public.identifier
 (
     instance_id character varying(100) NOT NULL,
     meta_id character varying(100),
-    uid character varying(100),
+    uid character varying(1024),
     version_id character varying(100),
     type character varying(1024),
     value character varying(1024),
@@ -112,7 +112,7 @@ CREATE TABLE IF NOT EXISTS public.quantitativevalue
 (
     instance_id character varying(100) NOT NULL,
     meta_id character varying(100),
-    uid character varying(100),
+    uid character varying(1024),
     version_id character varying(100),
     unitcode character varying(1024),
     value character varying(1024),
@@ -126,7 +126,7 @@ CREATE TABLE IF NOT EXISTS public.element
 (
     instance_id character varying(100) NOT NULL,
     meta_id character varying(100),
-    uid character varying(100),
+    uid character varying(1024),
     version_id character varying(100),
     type character varying(100),
     value text,
@@ -138,7 +138,7 @@ CREATE TABLE IF NOT EXISTS public.spatial
 (
     instance_id character varying(100) NOT NULL,
     meta_id character varying(100),
-    uid character varying(100),
+    uid character varying(1024),
     version_id character varying(100),
     location text,
     PRIMARY KEY (instance_id),
@@ -149,7 +149,7 @@ CREATE TABLE IF NOT EXISTS public.temporal
 (
     instance_id character varying(100) NOT NULL,
     meta_id character varying(100),
-    uid character varying(100),
+    uid character varying(1024),
     version_id character varying(100),
     startDate timestamp,
     endDate timestamp,
@@ -164,12 +164,12 @@ CREATE TABLE IF NOT EXISTS public.address
 (
     instance_id character varying(100) NOT NULL,
     meta_id character varying(100),
-    uid character varying(100),
+    uid character varying(1024),
     version_id character varying(100),
     country character varying(255),
     countrycode character varying(10),
     street character varying(255),
-    postal_code character varying(20),
+    postal_code character varying(50),
     locality character varying(255),
     PRIMARY KEY (instance_id),
     FOREIGN KEY (version_id) REFERENCES public.versioningstatus (version_id)
@@ -183,11 +183,11 @@ CREATE TABLE IF NOT EXISTS public.category_scheme
 (
     instance_id character varying(100) NOT NULL,
     meta_id character varying(100),
-    uid character varying(100),
+    uid character varying(1024),
     version_id character varying(100),
     name character varying(255),
     code character varying(255),
-    description TEXT,
+    description text,
     logo character varying(255),
     homepage character varying(255),
     color character varying(255),
@@ -200,10 +200,10 @@ CREATE TABLE IF NOT EXISTS public.category
 (
     instance_id character varying(100) NOT NULL,
     meta_id character varying(100),
-    uid character varying(100),
+    uid character varying(1024),
     version_id character varying(100),
     in_scheme character varying(100) REFERENCES public.category_scheme (instance_id),
-    description TEXT,
+    description text,
     name character varying(255),
     PRIMARY KEY (instance_id),
     FOREIGN KEY (version_id) REFERENCES public.versioningstatus (version_id)
@@ -234,7 +234,7 @@ CREATE TABLE IF NOT EXISTS public.person
 (
     instance_id character varying(100) NOT NULL,
     meta_id character varying(100),
-    uid character varying(100),
+    uid character varying(1024),
     version_id character varying(100),
     familyname character varying(1024),
     givenname character varying(1024),
@@ -271,7 +271,7 @@ CREATE TABLE IF NOT EXISTS public.contactpoint
 (
     instance_id character varying(100) NOT NULL,
     meta_id character varying(100),
-    uid character varying(100),
+    uid character varying(1024),
     version_id character varying(100),
     role character varying(1024),
     PRIMARY KEY (instance_id),
@@ -294,7 +294,7 @@ CREATE TABLE IF NOT EXISTS public.organization
 (
     instance_id character varying(100) NOT NULL,
     meta_id character varying(100),
-    uid character varying(100),
+    uid character varying(1024),
     version_id character varying(100),
     acronym character varying(1024),
     leicode character varying(1024),
@@ -349,7 +349,7 @@ CREATE TABLE IF NOT EXISTS public.organization_legalname
 (
     instance_id character varying(100) NOT NULL,
     meta_id character varying(100),
-    uid character varying(100),
+    uid character varying(1024),
     version_id character varying(100),
     legalname character varying(1024),
     language character varying(1024),
@@ -385,7 +385,7 @@ CREATE TABLE IF NOT EXISTS public.dataproduct
 (
     instance_id character varying(100) NOT NULL,
     meta_id character varying(100),
-    uid character varying(100),
+    uid character varying(1024),
     version_id character varying(100),
     identifier character varying(1024),
     created timestamptz,
@@ -443,10 +443,10 @@ CREATE TABLE IF NOT EXISTS public.dataproduct_title
 (
     instance_id character varying(100) NOT NULL,
     meta_id character varying(100),
-    uid character varying(100),
+    uid character varying(1024),
     version_id character varying(100),
     title character varying(1024),
-    lang character varying(20),
+    lang character varying(50),
     dataproduct_instance_id character varying(100) NOT NULL,
     PRIMARY KEY (instance_id),
     FOREIGN KEY (version_id) REFERENCES public.versioningstatus (version_id),
@@ -457,10 +457,10 @@ CREATE TABLE IF NOT EXISTS public.dataproduct_description
 (
     instance_id character varying(100) NOT NULL,
     meta_id character varying(100),
-    uid character varying(100),
+    uid character varying(1024),
     version_id character varying(100),
     description text,
-    lang character varying(20),
+    lang character varying(50),
     dataproduct_instance_id character varying(100) NOT NULL,
     PRIMARY KEY (instance_id),
     FOREIGN KEY (version_id) REFERENCES public.versioningstatus (version_id),
@@ -480,7 +480,7 @@ CREATE TABLE IF NOT EXISTS public.dataproduct_provenance
 (
     instance_id character varying(100) NOT NULL,
     meta_id character varying(100),
-    uid character varying(100),
+    uid character varying(1024),
     version_id character varying(100),
     provenance character varying(1024),
     dataproduct_instance_id character varying(100) NOT NULL,
@@ -534,7 +534,7 @@ CREATE TABLE IF NOT EXISTS public.distribution
 (
     instance_id character varying(100) NOT NULL,
     meta_id character varying(100),
-    uid character varying(100),
+    uid character varying(1024),
     version_id character varying(100),
     issued timestamp,
     modified timestamp,
@@ -559,10 +559,10 @@ CREATE TABLE IF NOT EXISTS public.distribution_title
 (
     instance_id character varying(100) NOT NULL,
     meta_id character varying(100),
-    uid character varying(100),
+    uid character varying(1024),
     version_id character varying(100),
     title character varying(1024),
-    lang character varying(20),
+    lang character varying(50),
     distribution_instance_id character varying(100) NOT NULL,
     PRIMARY KEY (instance_id),
     FOREIGN KEY (version_id) REFERENCES public.versioningstatus (version_id),
@@ -573,10 +573,10 @@ CREATE TABLE IF NOT EXISTS public.distribution_description
 (
     instance_id character varying(100) NOT NULL,
     meta_id character varying(100),
-    uid character varying(100),
+    uid character varying(1024),
     version_id character varying(100),
-    description character varying(1024),
-    lang character varying(20),
+    description text,
+    lang character varying(50),
     distribution_instance_id character varying(100) NOT NULL,
     PRIMARY KEY (instance_id),
     FOREIGN KEY (version_id) REFERENCES public.versioningstatus (version_id),
@@ -601,7 +601,7 @@ CREATE TABLE IF NOT EXISTS public.webservice
 (
     instance_id character varying(100) NOT NULL,
     meta_id character varying(100),
-    uid character varying(100),
+    uid character varying(1024),
     version_id character varying(100),
     schemaidentifier character varying(1024),
     description text,
@@ -698,7 +698,7 @@ CREATE TABLE IF NOT EXISTS public.operation
 (
     instance_id character varying(100) NOT NULL,
     meta_id character varying(100),
-    uid character varying(100),
+    uid character varying(1024),
     version_id character varying(100),
     method character varying(1024),
     template text,
@@ -741,7 +741,7 @@ CREATE TABLE IF NOT EXISTS public.mapping
 (
     instance_id character varying(100) NOT NULL,
     meta_id character varying(100),
-    uid character varying(100),
+    uid character varying(1024),
     version_id character varying(100),
     label character varying(1024),
     variable character varying(1024),
@@ -776,7 +776,7 @@ CREATE TABLE IF NOT EXISTS public.softwareapplication
 (
     instance_id character varying(100) NOT NULL,
     meta_id character varying(100),
-    uid character varying(100),
+    uid character varying(1024),
     version_id character varying(100),
     name character varying(1024),
     description text,
@@ -813,7 +813,7 @@ CREATE TABLE IF NOT EXISTS public.softwareapplication_parameters
 (
     instance_id character varying(100) NOT NULL,
     meta_id character varying(100),
-    uid character varying(100),
+    uid character varying(1024),
     version_id character varying(100),
     encodingformat character varying(1024),
     conformsto character varying(1024),
@@ -849,7 +849,7 @@ CREATE TABLE IF NOT EXISTS public.softwaresourcecode
 (
     instance_id character varying(100) NOT NULL,
     meta_id character varying(100),
-    uid character varying(100),
+    uid character varying(1024),
     version_id character varying(100),
     name character varying(1024),
     description text,
@@ -907,7 +907,7 @@ CREATE TABLE IF NOT EXISTS public.service
 (
     instance_id character varying(100) NOT NULL,
     meta_id character varying(100),
-    uid character varying(100),
+    uid character varying(1024),
     version_id character varying(100),
     name character varying(1024),
     description text,
@@ -982,7 +982,7 @@ CREATE TABLE IF NOT EXISTS public.publication
 (
     instance_id character varying(100) NOT NULL,
     meta_id character varying(100),
-    uid character varying(100),
+    uid character varying(1024),
     version_id character varying(100),
     name character varying(1024),
     published timestamp,
@@ -1034,7 +1034,7 @@ CREATE TABLE IF NOT EXISTS public.facility
 (
     instance_id character varying(100) NOT NULL,
     meta_id character varying(100),
-    uid character varying(100),
+    uid character varying(1024),
     version_id character varying(100),
     identifier character varying(1024),
     description text,
@@ -1107,7 +1107,7 @@ CREATE TABLE IF NOT EXISTS public.equipment
 (
     instance_id character varying(100) NOT NULL,
     meta_id character varying(100),
-    uid character varying(100),
+    uid character varying(1024),
     version_id character varying(100),
     identifier character varying(1024),
     description text,
