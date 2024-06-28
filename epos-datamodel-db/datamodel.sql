@@ -54,6 +54,7 @@ CREATE TABLE IF NOT EXISTS public.metadata_user
     familyname character varying(1024),
     givenname character varying(1024),
     email character varying(1024),
+    isadmin character varying(1024),
     PRIMARY KEY (auth_identifier)
 );
 
@@ -70,8 +71,8 @@ CREATE TABLE IF NOT EXISTS public.metadata_group_user
     id character varying(100) NOT NULL,
     auth_identifier character varying(100) NOT NULL,
     group_id character varying(100),
-    request_status requeststatustype,
-    role roletype,
+    request_status character varying(100),
+    role character varying(100),
     PRIMARY KEY (id),
     FOREIGN KEY (group_id) REFERENCES public.metadata_group (id) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (auth_identifier) REFERENCES public.metadata_user (auth_identifier) ON DELETE CASCADE ON UPDATE CASCADE
