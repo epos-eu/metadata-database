@@ -1,3 +1,4 @@
+\connect cerif;
 BEGIN;
 
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
@@ -14,9 +15,8 @@ CREATE TYPE ontologytype AS ENUM ('BASE', 'MAPPING');
 CREATE TABLE IF NOT EXISTS public.ontologies
 (
     id character varying(100) NOT NULL,
-    name character varying(1024),
-    type character varying(1024),
-    content text,
+    ontologyname character varying(1024),
+    ontologybase64 text,
     PRIMARY KEY (id)
 );
 
