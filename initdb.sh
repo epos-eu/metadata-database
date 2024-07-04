@@ -28,7 +28,7 @@ cat  $x >> $INITCERIF/$((COUNT))_${x##*/}
 done
 COUNT=$((COUNT + 1))
 
-echo ${ADMIN_INSERT} > $INITCERIF/$((COUNT))_admins.sql
+echo ${ADMIN_REFACTORING_INSERT} > $INITCERIF/$((COUNT))_admins.sql
 COUNT=$((COUNT + 1))
 
 for x in epos-processing-db/*; do
