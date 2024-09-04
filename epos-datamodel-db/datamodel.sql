@@ -309,6 +309,7 @@ CREATE TABLE IF NOT EXISTS public.organization
     uid character varying(1024),
     version_id character varying(100),
     acronym character varying(1024),
+    legalname character varying(1024),
     leicode character varying(1024),
     address_id character varying(100),
     logo character varying(1024),
