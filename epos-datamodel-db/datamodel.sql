@@ -357,20 +357,6 @@ CREATE TABLE IF NOT EXISTS public.organization_element /* email, telephone */
 );
 
 
-CREATE TABLE IF NOT EXISTS public.organization_legalname
-(
-    instance_id character varying(100) NOT NULL,
-    meta_id character varying(100),
-    uid character varying(1024),
-    version_id character varying(100),
-    legalname character varying(1024),
-    language character varying(1024),
-    organization_instance_id character varying(100) NOT NULL,
-    PRIMARY KEY (instance_id),
-    FOREIGN KEY (version_id) REFERENCES public.versioningstatus (version_id),
-    FOREIGN KEY (organization_instance_id) REFERENCES public.organization (instance_id)
-);
-
 CREATE TABLE IF NOT EXISTS public.organization_contactpoint
 (
     organization_instance_id character varying(100) NOT NULL,
