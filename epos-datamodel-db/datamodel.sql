@@ -732,9 +732,8 @@ CREATE TABLE IF NOT EXISTS public.operation_element /* returns */
     FOREIGN KEY (operation_instance_id) REFERENCES public.operation (instance_id),
     FOREIGN KEY (element_instance_id) REFERENCES public.element (instance_id)
 );
-
-
 /* MAPPING */
+
 
 CREATE TABLE IF NOT EXISTS public.mapping
 (
@@ -755,9 +754,19 @@ CREATE TABLE IF NOT EXISTS public.mapping
     multiple_values character varying(1024),
     ismappingof character varying(100),
     PRIMARY KEY (instance_id),
-    FOREIGN KEY (version_id) REFERENCES public.versioningstatus (version_id),
-    FOREIGN KEY (ismappingof) REFERENCES public.operation (instance_id)
+    FOREIGN KEY (version_id) REFERENCES public.versioningstatus (version_id)
 );
+
+
+CREATE TABLE IF NOT EXISTS public.operation_mapping
+(
+    operation_instance_id character varying(100) NOT NULL,
+    mapping_instance_id character varying(100) NOT NULL,
+    PRIMARY KEY (operation_instance_id,mapping_instance_id),
+    FOREIGN KEY (operation_instance_id) REFERENCES public.operation (instance_id),
+    FOREIGN KEY (mapping_instance_id) REFERENCES public.mapping (instance_id)
+);
+
 
 CREATE TABLE IF NOT EXISTS public.mapping_element /* paramvalue */
 (
