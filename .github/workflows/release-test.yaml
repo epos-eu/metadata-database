@@ -14,7 +14,7 @@ jobs:
           ./initdb.sh
       - name: Docker build
         run: |
-          docker build  -f Dockerfile.build  -t epos/metadata-database-deploy:latest .
+          docker build  -f Dockerfile.build  -t epos/metadata-database-deploy-test:latest .
       - name: Login to DockerHub
         uses: docker/login-action@v1
         with:
@@ -22,4 +22,4 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
       - name: Docker push
         run: |
-          docker push epos/metadata-database-deploy:latest
+          docker push epos/metadata-database-deploy-test:latest
