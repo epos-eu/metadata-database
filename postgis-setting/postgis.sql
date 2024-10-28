@@ -21,3 +21,5 @@ CREATE EXTENSION IF NOT EXISTS postgis_tiger_geocoder;
 
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
+CREATE EXTENSION IF NOT EXISTS hstore schema pg_catalog;
+

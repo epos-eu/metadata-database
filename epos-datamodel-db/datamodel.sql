@@ -754,7 +754,7 @@ CREATE TABLE IF NOT EXISTS public.mapping
     multiple_values character varying(1024),
     ismappingof character varying(100),
     PRIMARY KEY (instance_id),
-    FOREIGN KEY (version_id) REFERENCES public.versioningstatus (version_id)
+    FOREIGN KEY (version_id) REFERENCES public.versioningstatus (version_id)  ON DELETE CASCADE
 );
 
 
@@ -763,8 +763,8 @@ CREATE TABLE IF NOT EXISTS public.operation_mapping
     operation_instance_id character varying(100) NOT NULL,
     mapping_instance_id character varying(100) NOT NULL,
     PRIMARY KEY (operation_instance_id,mapping_instance_id),
-    FOREIGN KEY (operation_instance_id) REFERENCES public.operation (instance_id),
-    FOREIGN KEY (mapping_instance_id) REFERENCES public.mapping (instance_id)
+    FOREIGN KEY (operation_instance_id) REFERENCES public.operation (instance_id)  ON DELETE CASCADE,
+    FOREIGN KEY (mapping_instance_id) REFERENCES public.mapping (instance_id)  ON DELETE CASCADE
 );
 
 
@@ -773,8 +773,8 @@ CREATE TABLE IF NOT EXISTS public.mapping_element /* paramvalue */
     mapping_instance_id character varying(100) NOT NULL,
     element_instance_id character varying(100) NOT NULL,
     PRIMARY KEY (mapping_instance_id, element_instance_id),
-    FOREIGN KEY (mapping_instance_id) REFERENCES public.mapping (instance_id),
-    FOREIGN KEY (element_instance_id) REFERENCES public.element (instance_id)
+    FOREIGN KEY (mapping_instance_id) REFERENCES public.mapping (instance_id) ON DELETE CASCADE,
+    FOREIGN KEY (element_instance_id) REFERENCES public.element (instance_id) ON DELETE CASCADE
 );
 
 
@@ -796,7 +796,7 @@ CREATE TABLE IF NOT EXISTS public.softwareapplication
     installURL character varying(1024),
     mainentityofpage character varying(1024),
     PRIMARY KEY (instance_id),
-    FOREIGN KEY (version_id) REFERENCES public.versioningstatus (version_id)
+    FOREIGN KEY (version_id) REFERENCES public.versioningstatus (version_id) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS public.softwareapplication_contactpoint
@@ -804,8 +804,8 @@ CREATE TABLE IF NOT EXISTS public.softwareapplication_contactpoint
     softwareapplication_instance_id character varying(100) NOT NULL,
     contactpoint_instance_id character varying(100) NOT NULL,
     PRIMARY KEY (softwareapplication_instance_id, contactpoint_instance_id),
-    FOREIGN KEY (softwareapplication_instance_id) REFERENCES public.softwareapplication (instance_id),
-    FOREIGN KEY (contactpoint_instance_id) REFERENCES public.contactpoint (instance_id)
+    FOREIGN KEY (softwareapplication_instance_id) REFERENCES public.softwareapplication (instance_id) ON DELETE CASCADE,
+    FOREIGN KEY (contactpoint_instance_id) REFERENCES public.contactpoint (instance_id) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS public.softwareapplication_identifier
@@ -813,8 +813,8 @@ CREATE TABLE IF NOT EXISTS public.softwareapplication_identifier
     softwareapplication_instance_id character varying(100) NOT NULL,
     identifier_instance_id character varying(100) NOT NULL,
     PRIMARY KEY (softwareapplication_instance_id,identifier_instance_id),
-    FOREIGN KEY (softwareapplication_instance_id) REFERENCES public.softwareapplication (instance_id),
-    FOREIGN KEY (identifier_instance_id) REFERENCES public.identifier (instance_id)
+    FOREIGN KEY (softwareapplication_instance_id) REFERENCES public.softwareapplication (instance_id) ON DELETE CASCADE,
+    FOREIGN KEY (identifier_instance_id) REFERENCES public.identifier (instance_id) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS public.softwareapplication_parameters
@@ -828,7 +828,7 @@ CREATE TABLE IF NOT EXISTS public.softwareapplication_parameters
     action character varying(1024),
     softwareapplication_instance_id character varying(100) NOT NULL,
     PRIMARY KEY (instance_id),
-    FOREIGN KEY (softwareapplication_instance_id) REFERENCES public.softwareapplication (instance_id)
+    FOREIGN KEY (softwareapplication_instance_id) REFERENCES public.softwareapplication (instance_id) ON DELETE CASCADE
 );
 
 
@@ -837,8 +837,8 @@ CREATE TABLE IF NOT EXISTS public.softwareapplication_operation
     softwareapplication_instance_id character varying(100) NOT NULL,
     operation_instance_id character varying(100) NOT NULL,
     PRIMARY KEY (softwareapplication_instance_id, operation_instance_id),
-    FOREIGN KEY (softwareapplication_instance_id) REFERENCES public.softwareapplication (instance_id),
-    FOREIGN KEY (operation_instance_id) REFERENCES public.operation (instance_id)
+    FOREIGN KEY (softwareapplication_instance_id) REFERENCES public.softwareapplication (instance_id) ON DELETE CASCADE,
+    FOREIGN KEY (operation_instance_id) REFERENCES public.operation (instance_id) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS public.softwareapplication_category
@@ -846,8 +846,8 @@ CREATE TABLE IF NOT EXISTS public.softwareapplication_category
     category_instance_id character varying(100) NOT NULL,
     softwareapplication_instance_id character varying(100) NOT NULL,
     PRIMARY KEY (softwareapplication_instance_id, category_instance_id),
-    FOREIGN KEY (softwareapplication_instance_id) REFERENCES public.softwareapplication (instance_id),
-    FOREIGN KEY (category_instance_id) REFERENCES public.category (instance_id)
+    FOREIGN KEY (softwareapplication_instance_id) REFERENCES public.softwareapplication (instance_id) ON DELETE CASCADE,
+    FOREIGN KEY (category_instance_id) REFERENCES public.category (instance_id) ON DELETE CASCADE
 );
 
 
@@ -869,7 +869,7 @@ CREATE TABLE IF NOT EXISTS public.softwaresourcecode
     coderepository character varying(1024),
     mainentityofpage character varying(1024),
     PRIMARY KEY (instance_id),
-    FOREIGN KEY (version_id) REFERENCES public.versioningstatus (version_id)
+    FOREIGN KEY (version_id) REFERENCES public.versioningstatus (version_id) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS public.softwaresourcecode_contactpoint
@@ -877,8 +877,8 @@ CREATE TABLE IF NOT EXISTS public.softwaresourcecode_contactpoint
     softwaresourcecode_instance_id character varying(100) NOT NULL,
     contactpoint_instance_id character varying(100) NOT NULL,
     PRIMARY KEY (softwaresourcecode_instance_id, contactpoint_instance_id),
-    FOREIGN KEY (softwaresourcecode_instance_id) REFERENCES public.softwaresourcecode (instance_id),
-    FOREIGN KEY (contactpoint_instance_id) REFERENCES public.contactpoint (instance_id)
+    FOREIGN KEY (softwaresourcecode_instance_id) REFERENCES public.softwaresourcecode (instance_id) ON DELETE CASCADE,
+    FOREIGN KEY (contactpoint_instance_id) REFERENCES public.contactpoint (instance_id) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS public.softwaresourcecode_identifier
@@ -886,8 +886,8 @@ CREATE TABLE IF NOT EXISTS public.softwaresourcecode_identifier
     softwaresourcecode_instance_id character varying(100) NOT NULL,
     identifier_instance_id character varying(100) NOT NULL,
     PRIMARY KEY (softwaresourcecode_instance_id,identifier_instance_id),
-    FOREIGN KEY (softwaresourcecode_instance_id) REFERENCES public.softwaresourcecode (instance_id),
-    FOREIGN KEY (identifier_instance_id) REFERENCES public.identifier (instance_id)
+    FOREIGN KEY (softwaresourcecode_instance_id) REFERENCES public.softwaresourcecode (instance_id) ON DELETE CASCADE,
+    FOREIGN KEY (identifier_instance_id) REFERENCES public.identifier (instance_id) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS public.softwaresourcecode_element /* programminglanguage */
@@ -895,8 +895,8 @@ CREATE TABLE IF NOT EXISTS public.softwaresourcecode_element /* programminglangu
     softwaresourcecode_instance_id character varying(100) NOT NULL,
     element_instance_id character varying(100) NOT NULL,
     PRIMARY KEY (softwaresourcecode_instance_id, element_instance_id),
-    FOREIGN KEY (softwaresourcecode_instance_id) REFERENCES public.softwaresourcecode (instance_id),
-    FOREIGN KEY (element_instance_id) REFERENCES public.element (instance_id)
+    FOREIGN KEY (softwaresourcecode_instance_id) REFERENCES public.softwaresourcecode (instance_id) ON DELETE CASCADE,
+    FOREIGN KEY (element_instance_id) REFERENCES public.element (instance_id) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS public.softwaresourcecode_category
@@ -904,8 +904,8 @@ CREATE TABLE IF NOT EXISTS public.softwaresourcecode_category
     category_instance_id character varying(100) NOT NULL,
     softwaresourcecode_instance_id character varying(100) NOT NULL,
     PRIMARY KEY (softwaresourcecode_instance_id, category_instance_id),
-    FOREIGN KEY (softwaresourcecode_instance_id) REFERENCES public.softwaresourcecode (instance_id),
-    FOREIGN KEY (category_instance_id) REFERENCES public.category (instance_id)
+    FOREIGN KEY (softwaresourcecode_instance_id) REFERENCES public.softwaresourcecode (instance_id) ON DELETE CASCADE,
+    FOREIGN KEY (category_instance_id) REFERENCES public.category (instance_id) ON DELETE CASCADE
 );
 
 
@@ -924,7 +924,7 @@ CREATE TABLE IF NOT EXISTS public.service
     keywords text,
     servicecontract character varying(100),
     PRIMARY KEY (instance_id),
-    FOREIGN KEY (version_id) REFERENCES public.versioningstatus (version_id)
+    FOREIGN KEY (version_id) REFERENCES public.versioningstatus (version_id) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS public.service_identifier
@@ -932,8 +932,8 @@ CREATE TABLE IF NOT EXISTS public.service_identifier
     service_instance_id character varying(100) NOT NULL,
     identifier_instance_id character varying(100) NOT NULL,
     PRIMARY KEY (service_instance_id,identifier_instance_id),
-    FOREIGN KEY (service_instance_id) REFERENCES public.service (instance_id),
-    FOREIGN KEY (identifier_instance_id) REFERENCES public.identifier (instance_id)
+    FOREIGN KEY (service_instance_id) REFERENCES public.service (instance_id) ON DELETE CASCADE,
+    FOREIGN KEY (identifier_instance_id) REFERENCES public.identifier (instance_id) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS public.service_contactpoint
@@ -941,8 +941,8 @@ CREATE TABLE IF NOT EXISTS public.service_contactpoint
     service_instance_id character varying(100) NOT NULL,
     contactpoint_instance_id character varying(100) NOT NULL,
     PRIMARY KEY (service_instance_id, contactpoint_instance_id),
-    FOREIGN KEY (service_instance_id) REFERENCES public.service (instance_id),
-    FOREIGN KEY (contactpoint_instance_id) REFERENCES public.contactpoint (instance_id)
+    FOREIGN KEY (service_instance_id) REFERENCES public.service (instance_id) ON DELETE CASCADE,
+    FOREIGN KEY (contactpoint_instance_id) REFERENCES public.contactpoint (instance_id) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS public.service_spatial
@@ -950,8 +950,8 @@ CREATE TABLE IF NOT EXISTS public.service_spatial
     service_instance_id character varying(100) NOT NULL,
     spatial_instance_id character varying(100) NOT NULL,
     PRIMARY KEY (service_instance_id,spatial_instance_id),
-    FOREIGN KEY (service_instance_id) REFERENCES public.service (instance_id),
-    FOREIGN KEY (spatial_instance_id) REFERENCES public.spatial (instance_id)
+    FOREIGN KEY (service_instance_id) REFERENCES public.service (instance_id) ON DELETE CASCADE,
+    FOREIGN KEY (spatial_instance_id) REFERENCES public.spatial (instance_id) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS public.service_temporal
@@ -959,8 +959,8 @@ CREATE TABLE IF NOT EXISTS public.service_temporal
     service_instance_id character varying(100) NOT NULL,
     temporal_instance_id character varying(100) NOT NULL,
     PRIMARY KEY (service_instance_id,temporal_instance_id),
-    FOREIGN KEY (service_instance_id) REFERENCES public.service (instance_id),
-    FOREIGN KEY (temporal_instance_id) REFERENCES public.temporal (instance_id)
+    FOREIGN KEY (service_instance_id) REFERENCES public.service (instance_id) ON DELETE CASCADE,
+    FOREIGN KEY (temporal_instance_id) REFERENCES public.temporal (instance_id) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS public.service_category
@@ -968,8 +968,8 @@ CREATE TABLE IF NOT EXISTS public.service_category
     category_instance_id character varying(100) NOT NULL,
     service_instance_id character varying(100) NOT NULL,
     PRIMARY KEY (service_instance_id, category_instance_id),
-    FOREIGN KEY (service_instance_id) REFERENCES public.service (instance_id),
-    FOREIGN KEY (category_instance_id) REFERENCES public.category (instance_id)
+    FOREIGN KEY (service_instance_id) REFERENCES public.service (instance_id) ON DELETE CASCADE,
+    FOREIGN KEY (category_instance_id) REFERENCES public.category (instance_id) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS public.service_provider /*person or organization*/
@@ -979,7 +979,7 @@ CREATE TABLE IF NOT EXISTS public.service_provider /*person or organization*/
     resource_entity character varying(100) NOT NULL,
     UNIQUE(entity_instance_id,resource_entity),
     PRIMARY KEY (service_instance_id),
-    FOREIGN KEY (service_instance_id) REFERENCES public.service (instance_id)
+    FOREIGN KEY (service_instance_id) REFERENCES public.service (instance_id) ON DELETE CASCADE
 );
 
 
@@ -1003,7 +1003,7 @@ CREATE TABLE IF NOT EXISTS public.publication
     author character varying(1024),
     publisher character varying(100),
     PRIMARY KEY (instance_id),
-    FOREIGN KEY (version_id) REFERENCES public.versioningstatus (version_id)
+    FOREIGN KEY (version_id) REFERENCES public.versioningstatus (version_id) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS public.publication_identifier
@@ -1011,8 +1011,8 @@ CREATE TABLE IF NOT EXISTS public.publication_identifier
     publication_instance_id character varying(100) NOT NULL,
     identifier_instance_id character varying(100) NOT NULL,
     PRIMARY KEY (publication_instance_id,identifier_instance_id),
-    FOREIGN KEY (publication_instance_id) REFERENCES public.publication (instance_id),
-    FOREIGN KEY (identifier_instance_id) REFERENCES public.identifier (instance_id)
+    FOREIGN KEY (publication_instance_id) REFERENCES public.publication (instance_id) ON DELETE CASCADE,
+    FOREIGN KEY (identifier_instance_id) REFERENCES public.identifier (instance_id) ON DELETE CASCADE
 );
 
 
@@ -1021,8 +1021,8 @@ CREATE TABLE IF NOT EXISTS public.publication_contributor
     person_instance_id character varying(100) NOT NULL,
     publication_instance_id character varying(100) NOT NULL,
     PRIMARY KEY (publication_instance_id, person_instance_id),
-    FOREIGN KEY (publication_instance_id) REFERENCES public.publication (instance_id),
-    FOREIGN KEY (person_instance_id) REFERENCES public.person (instance_id)
+    FOREIGN KEY (publication_instance_id) REFERENCES public.publication (instance_id) ON DELETE CASCADE,
+    FOREIGN KEY (person_instance_id) REFERENCES public.person (instance_id) ON DELETE CASCADE
 );
 
 
@@ -1031,8 +1031,8 @@ CREATE TABLE IF NOT EXISTS public.publication_category
     category_instance_id character varying(100) NOT NULL,
     publication_instance_id character varying(100) NOT NULL,
     PRIMARY KEY (publication_instance_id, category_instance_id),
-    FOREIGN KEY (publication_instance_id) REFERENCES public.publication (instance_id),
-    FOREIGN KEY (category_instance_id) REFERENCES public.category (instance_id)
+    FOREIGN KEY (publication_instance_id) REFERENCES public.publication (instance_id) ON DELETE CASCADE,
+    FOREIGN KEY (category_instance_id) REFERENCES public.category (instance_id) ON DELETE CASCADE
 );
 
 
@@ -1050,7 +1050,7 @@ CREATE TABLE IF NOT EXISTS public.facility
     type character(1024),
     keywords text,
     PRIMARY KEY (instance_id),
-    FOREIGN KEY (version_id) REFERENCES public.versioningstatus (version_id)
+    FOREIGN KEY (version_id) REFERENCES public.versioningstatus (version_id) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS public.facility_address
@@ -1058,8 +1058,8 @@ CREATE TABLE IF NOT EXISTS public.facility_address
     facility_instance_id character varying(100) NOT NULL,
     address_instance_id character varying(100) NOT NULL,
     PRIMARY KEY (facility_instance_id, address_instance_id),
-    FOREIGN KEY (facility_instance_id) REFERENCES public.facility (instance_id),
-    FOREIGN KEY (address_instance_id) REFERENCES public.address (instance_id)
+    FOREIGN KEY (facility_instance_id) REFERENCES public.facility (instance_id) ON DELETE CASCADE,
+    FOREIGN KEY (address_instance_id) REFERENCES public.address (instance_id) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS public.facility_contactpoint
@@ -1067,8 +1067,8 @@ CREATE TABLE IF NOT EXISTS public.facility_contactpoint
     facility_instance_id character varying(100) NOT NULL,
     contactpoint_instance_id character varying(100) NOT NULL,
     PRIMARY KEY (facility_instance_id, contactpoint_instance_id),
-    FOREIGN KEY (facility_instance_id) REFERENCES public.facility (instance_id),
-    FOREIGN KEY (contactpoint_instance_id) REFERENCES public.contactpoint (instance_id)
+    FOREIGN KEY (facility_instance_id) REFERENCES public.facility (instance_id) ON DELETE CASCADE,
+    FOREIGN KEY (contactpoint_instance_id) REFERENCES public.contactpoint (instance_id) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS public.facility_element /* pageurl */
@@ -1076,8 +1076,8 @@ CREATE TABLE IF NOT EXISTS public.facility_element /* pageurl */
     facility_instance_id character varying(100) NOT NULL,
     element_instance_id character varying(100) NOT NULL,
     PRIMARY KEY (facility_instance_id, element_instance_id),
-    FOREIGN KEY (facility_instance_id) REFERENCES public.facility (instance_id),
-    FOREIGN KEY (element_instance_id) REFERENCES public.element (instance_id)
+    FOREIGN KEY (facility_instance_id) REFERENCES public.facility (instance_id) ON DELETE CASCADE,
+    FOREIGN KEY (element_instance_id) REFERENCES public.element (instance_id) ON DELETE CASCADE
 );
 
 
@@ -1086,8 +1086,8 @@ CREATE TABLE IF NOT EXISTS public.facility_ispartof
     facility1_instance_id character varying(100) NOT NULL,
     facility2_instance_id character varying(100) NOT NULL,
     PRIMARY KEY (facility1_instance_id, facility2_instance_id),
-    FOREIGN KEY (facility1_instance_id) REFERENCES public.facility (instance_id),
-    FOREIGN KEY (facility2_instance_id) REFERENCES public.facility (instance_id)
+    FOREIGN KEY (facility1_instance_id) REFERENCES public.facility (instance_id) ON DELETE CASCADE,
+    FOREIGN KEY (facility2_instance_id) REFERENCES public.facility (instance_id) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS public.facility_category
@@ -1095,8 +1095,8 @@ CREATE TABLE IF NOT EXISTS public.facility_category
     category_instance_id character varying(100) NOT NULL,
     facility_instance_id character varying(100) NOT NULL,
     PRIMARY KEY (facility_instance_id, category_instance_id),
-    FOREIGN KEY (facility_instance_id) REFERENCES public.facility (instance_id),
-    FOREIGN KEY (category_instance_id) REFERENCES public.category (instance_id)
+    FOREIGN KEY (facility_instance_id) REFERENCES public.facility (instance_id) ON DELETE CASCADE,
+    FOREIGN KEY (category_instance_id) REFERENCES public.category (instance_id) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS public.facility_spatial
@@ -1104,8 +1104,8 @@ CREATE TABLE IF NOT EXISTS public.facility_spatial
     facility_instance_id character varying(100) NOT NULL,
     spatial_instance_id character varying(100) NOT NULL,
     PRIMARY KEY (facility_instance_id,spatial_instance_id),
-    FOREIGN KEY (facility_instance_id) REFERENCES public.facility (instance_id),
-    FOREIGN KEY (spatial_instance_id) REFERENCES public.spatial (instance_id)
+    FOREIGN KEY (facility_instance_id) REFERENCES public.facility (instance_id) ON DELETE CASCADE,
+    FOREIGN KEY (spatial_instance_id) REFERENCES public.spatial (instance_id) ON DELETE CASCADE
 );
 
 
@@ -1131,8 +1131,8 @@ CREATE TABLE IF NOT EXISTS public.equipment
     sampleperiod character varying(100),
     serialnumber character varying(1024),
     PRIMARY KEY (instance_id),
-    FOREIGN KEY (version_id) REFERENCES public.versioningstatus (version_id),
-    FOREIGN KEY (creator) REFERENCES public.organization (instance_id)
+    FOREIGN KEY (version_id) REFERENCES public.versioningstatus (version_id) ON DELETE CASCADE,
+    FOREIGN KEY (creator) REFERENCES public.organization (instance_id) ON DELETE CASCADE
 );
 
 
@@ -1141,8 +1141,8 @@ CREATE TABLE IF NOT EXISTS public.equipment_contactpoint
     equipment_instance_id character varying(100) NOT NULL,
     contactpoint_instance_id character varying(100) NOT NULL,
     PRIMARY KEY (equipment_instance_id, contactpoint_instance_id),
-    FOREIGN KEY (equipment_instance_id) REFERENCES public.equipment (instance_id),
-    FOREIGN KEY (contactpoint_instance_id) REFERENCES public.contactpoint (instance_id)
+    FOREIGN KEY (equipment_instance_id) REFERENCES public.equipment (instance_id) ON DELETE CASCADE,
+    FOREIGN KEY (contactpoint_instance_id) REFERENCES public.contactpoint (instance_id) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS public.equipment_element /* pageurl */
@@ -1150,8 +1150,8 @@ CREATE TABLE IF NOT EXISTS public.equipment_element /* pageurl */
     equipment_instance_id character varying(100) NOT NULL,
     element_instance_id character varying(100) NOT NULL,
     PRIMARY KEY (equipment_instance_id, element_instance_id),
-    FOREIGN KEY (equipment_instance_id) REFERENCES public.equipment (instance_id),
-    FOREIGN KEY (element_instance_id) REFERENCES public.element (instance_id)
+    FOREIGN KEY (equipment_instance_id) REFERENCES public.equipment (instance_id) ON DELETE CASCADE,
+    FOREIGN KEY (element_instance_id) REFERENCES public.element (instance_id) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS public.equipment_spatial
@@ -1159,8 +1159,8 @@ CREATE TABLE IF NOT EXISTS public.equipment_spatial
     equipment_instance_id character varying(100) NOT NULL,
     spatial_instance_id character varying(100) NOT NULL,
     PRIMARY KEY (equipment_instance_id,spatial_instance_id),
-    FOREIGN KEY (equipment_instance_id) REFERENCES public.equipment (instance_id),
-    FOREIGN KEY (spatial_instance_id) REFERENCES public.spatial (instance_id)
+    FOREIGN KEY (equipment_instance_id) REFERENCES public.equipment (instance_id) ON DELETE CASCADE,
+    FOREIGN KEY (spatial_instance_id) REFERENCES public.spatial (instance_id) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS public.equipment_temporal
@@ -1168,8 +1168,8 @@ CREATE TABLE IF NOT EXISTS public.equipment_temporal
     equipment_instance_id character varying(100) NOT NULL,
     temporal_instance_id character varying(100) NOT NULL,
     PRIMARY KEY (equipment_instance_id,temporal_instance_id),
-    FOREIGN KEY (equipment_instance_id) REFERENCES public.equipment (instance_id),
-    FOREIGN KEY (temporal_instance_id) REFERENCES public.temporal (instance_id)
+    FOREIGN KEY (equipment_instance_id) REFERENCES public.equipment (instance_id) ON DELETE CASCADE,
+    FOREIGN KEY (temporal_instance_id) REFERENCES public.temporal (instance_id) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS public.equipment_category
@@ -1177,8 +1177,8 @@ CREATE TABLE IF NOT EXISTS public.equipment_category
     category_instance_id character varying(100) NOT NULL,
     equipment_instance_id character varying(100) NOT NULL,
     PRIMARY KEY (equipment_instance_id, category_instance_id),
-    FOREIGN KEY (equipment_instance_id) REFERENCES public.equipment (instance_id),
-    FOREIGN KEY (category_instance_id) REFERENCES public.category (instance_id)
+    FOREIGN KEY (equipment_instance_id) REFERENCES public.equipment (instance_id) ON DELETE CASCADE,
+    FOREIGN KEY (category_instance_id) REFERENCES public.category (instance_id) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS public.equipment_ispartof /*equipment or facility*/
@@ -1188,7 +1188,7 @@ CREATE TABLE IF NOT EXISTS public.equipment_ispartof /*equipment or facility*/
     resource_entity character varying(100) NOT NULL,
     UNIQUE(entity_instance_id,resource_entity),
     PRIMARY KEY (equipment_instance_id),
-    FOREIGN KEY (equipment_instance_id) REFERENCES public.equipment (instance_id)
+    FOREIGN KEY (equipment_instance_id) REFERENCES public.equipment (instance_id) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS public.equipment_relation
@@ -1198,7 +1198,7 @@ CREATE TABLE IF NOT EXISTS public.equipment_relation
     resource_entity character varying(100) NOT NULL,
     UNIQUE(entity_instance_id,resource_entity),
     PRIMARY KEY (equipment_instance_id),
-    FOREIGN KEY (equipment_instance_id) REFERENCES public.equipment (instance_id)
+    FOREIGN KEY (equipment_instance_id) REFERENCES public.equipment (instance_id) ON DELETE CASCADE
 );
 
 END;
