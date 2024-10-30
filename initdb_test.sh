@@ -19,8 +19,5 @@ docker run -d \
 sleep 30
 
 PGPASSWORD=$PASSWORD psql -U $USER -d $DATABASE_NAME -h localhost -f ./epos-datamodel-db/datamodel.sql
-PGPASSWORD=$PASSWORD psql -U $USER -d $DATABASE_NAME -h localhost -f ./epos-datamodel-semantic/1-create_database.sql
-PGPASSWORD=$PASSWORD psql -U $USER -d $DATABASE_NAME -h localhost -f ./epos-datamodel-semantic/2-class_property_domain_range.sql
-PGPASSWORD=$PASSWORD psql -U $USER -d $DATABASE_NAME -h localhost -f ./epos-datamodel-semantic/3-source_to_target_mapping.sql
 PGPASSWORD=$PASSWORD psql -U $USER -d $DATABASE_NAME -h localhost -f ./epos-processing-db/processing_environment_db.sql
 PGPASSWORD=$PASSWORD psql -U $USER -d $DATABASE_NAME -h localhost -f ./epos-converter-db/plugins_registry.sql

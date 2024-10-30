@@ -14,11 +14,6 @@ echo "Handling file $x"
 psql -U $PGUSER -d cerif -f $x
 done
 
-for x in /initdb/epos-datamodel-semantic/*; do
-echo "Handling file $x"
-psql -U $PGUSER -d cerif -f $x
-done
-
 for x in /initdb/epos-converter-db/*; do
 echo "Handling file $x"
 psql -U $PGUSER -d cerif -f $x

@@ -14,10 +14,6 @@ for x in /init-db/epos-processing-db/*; do
 psql -Atx $POSTGRESQL_JOB_CONNECTION_STRING -f $x
 done
 
-for x in /init-db/epos-datamodel-semantic/*; do
-psql -Atx $POSTGRESQL_JOB_CONNECTION_STRING -f $x
-done
-
 for x in /init-db/epos-converter-db/*; do
 psql -Atx $POSTGRESQL_JOB_CONNECTION_STRING -f $x
 done
