@@ -12,14 +12,14 @@
 # License for the specific language governing permissions and limitations under
 # the License.
 
-INITCERIF=docker-entrypoint-initdb.d
+INITCERIF=docker-entrypoint-cleandb.d
 COUNT=0
 
 mkdir $INITCERIF
 
 # METADATA CATALOGUE
 
-for x in metadata-catalogue/build/*; do
+for x in metadata-catalogue/clean/*; do
 cp  $x $INITCERIF/$((COUNT))_${x##*/}
 done 
 COUNT=$((COUNT + 1))
