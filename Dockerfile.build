@@ -1,4 +1,4 @@
-FROM kartoza/postgis:16-3.4--v2024.03.17
+FROM kartoza/postgis:14-3.1--v2021.10.12
 
 LABEL description="Initializing EPOS metadata Database"
 COPY --chown=postgres:postgres ./docker-entrypoint-initdb.d /docker-entrypoint-initdb.d

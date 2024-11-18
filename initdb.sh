@@ -17,61 +17,46 @@ COUNT=0
 
 mkdir $INITCERIF
 
-# METADATA CATALOGUE
-
-for x in metadata-catalogue/build/*; do
+for x in build/*; do
 cp  $x $INITCERIF/$((COUNT))_${x##*/}
 done 
 COUNT=$((COUNT + 1))
 
-for x in metadata-catalogue/epos-datamodel-db/*; do
+for x in epos-datamodel-db/*; do
 echo "\connect cerif;" > $INITCERIF/$((COUNT))_${x##*/}
 cat  $x >> $INITCERIF/$((COUNT))_${x##*/}
 done
 COUNT=$((COUNT + 1))
 
-echo ${ADMIN_REFACTORING_INSERT} > $INITCERIF/$((COUNT))_admins.sql
+echo ${ADMIN_INSERT} > $INITCERIF/$((COUNT))_admins.sql
 COUNT=$((COUNT + 1))
 
-for x in metadata-catalogue/epos-datamodel-semantic/*; do
+for x in epos-datamodel-semantic/*; do
 echo "\connect cerif;" > $INITCERIF/$((COUNT))_${x##*/}
 cat  $x >> $INITCERIF/$((COUNT))_${x##*/}
 done
 COUNT=$((COUNT + 1))
 
-for x in metadata-catalogue/epos-processing-db/*; do
+for x in epos-processing-db/*; do
 echo "\connect cerif;" > $INITCERIF/$((COUNT))_${x##*/}
 cat  $x >> $INITCERIF/$((COUNT))_${x##*/}
 done
 COUNT=$((COUNT + 1))
 
-for x in metadata-catalogue/epos-converter-db/*; do
+for x in epos-converter-db/*; do
 echo "\connect cerif;" > $INITCERIF/$((COUNT))_${x##*/}
 cat  $x >> $INITCERIF/$((COUNT))_${x##*/}
 done
 COUNT=$((COUNT + 1))
 
-
-for x in metadata-catalogue/postgis-setting/*; do
+for x in epos-sharing-db/*; do
 echo "\connect cerif;" > $INITCERIF/$((COUNT))_${x##*/}
 cat  $x >> $INITCERIF/$((COUNT))_${x##*/}
 done
 COUNT=$((COUNT + 1))
 
-# SHARING CATALOGUE
-for x in sharing-catalogue/build/*; do
-cp  $x $INITCERIF/$((COUNT))_${x##*/}
-done 
-COUNT=$((COUNT + 1))
-
-for x in sharing-catalogue/epos-sharing-db/*; do
-echo "\connect sharing_catalogue;" > $INITCERIF/$((COUNT))_${x##*/}
-cat  $x >> $INITCERIF/$((COUNT))_${x##*/}
-done
-COUNT=$((COUNT + 1))
-
-for x in sharing-catalogue/postgis-setting/*; do
-echo "\connect sharing_catalogue;" > $INITCERIF/$((COUNT))_${x##*/}
+for x in postgis-setting/*; do
+echo "\connect cerif;" > $INITCERIF/$((COUNT))_${x##*/}
 cat  $x >> $INITCERIF/$((COUNT))_${x##*/}
 done
 COUNT=$((COUNT + 1))
