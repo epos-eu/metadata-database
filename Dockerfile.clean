@@ -1,10 +1,4 @@
-FROM kartoza/postgis:14-3.1--v2021.10.12
+FROM kartoza/postgis:16-3.4--v2024.03.17
 
-COPY --chown=postgres:postgres ./clean /init-db/clean
-COPY --chown=postgres:postgres ./epos-datamodel-db /init-db/epos-datamodel-db
-COPY --chown=postgres:postgres ./epos-processing-db /init-db/epos-processing-db
-COPY --chown=postgres:postgres ./epos-converter-db /initdb/epos-converter-db
-COPY --chown=postgres:postgres ./epos-datamodel-semantic /init-db/epos-datamodel-semantic
-COPY --chown=postgres:postgres ./postgis-setting /init-db/postgis-setting
-ADD ./restoredb.sh /init-db/init-db.sh
-RUN chmod +x /init-db/init-db.sh
+LABEL description="Initializing EPOS metadata Database"
+COPY --chown=postgres:postgres ./docker-entrypoint-cleandb.d /docker-entrypoint-initdb.d

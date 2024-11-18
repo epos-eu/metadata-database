@@ -1,10 +1,4 @@
 FROM yceos/spilo:2.0-p6
 
-ADD ./clean /initdb/clean
-ADD ./build /initdb/build
-ADD ./epos-datamodel-db /initdb/epos-datamodel-db
-ADD ./epos-processing-db /initdb/epos-processing-db
-ADD ./epos-datamodel-semantic /initdb/epos-datamodel-semantic
-ADD ./postgis-setting /initdb/postgis-setting
-ADD ./bootstrap_db.sh /initdb/bootstrap_db.sh
-RUN chmod +x /initdb/bootstrap_db.sh
+LABEL description="Initializing EPOS metadata Database"
+COPY --chown=postgres:postgres ./docker-entrypoint-cleandb.d /docker-entrypoint-initdb.d

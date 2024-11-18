@@ -1,3 +1,7 @@
+\connect cerif;
+\connect cerif;
+BEGIN;
+
 --
 -- Data for Name: ontology; Type: TABLE DATA; Schema: public; Owner: root
 --
@@ -1664,3 +1668,6 @@ INSERT INTO public.range (property_id, range_id) VALUES ('epospropertyvalue2', '
 INSERT INTO public.range (property_id, range_id) VALUES ('eposapidocumentation1', 'literal');
 INSERT INTO public.range (property_id, range_id) VALUES ('eposapidocumentation2', 'literal');
 INSERT INTO public.range (property_id, range_id) VALUES ('eposapidocumentation3', 'literal');
+
+
+END;

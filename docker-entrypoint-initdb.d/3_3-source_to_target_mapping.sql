@@ -1,3 +1,7 @@
+\connect cerif;
+\connect cerif;
+BEGIN;
+
 --
 -- TOC entry 3365 (class 0 OID 26155)
 -- Dependencies: 215
@@ -214,3 +218,6 @@ INSERT INTO public.source_to_target_mapping (property_source, property_target) V
 /*edmquantitativevalue -->eposquantitativevalue*/
 INSERT INTO public.source_to_target_mapping (property_source, property_target) VALUES ('edmquantitativevalue1', 'eposquantitativevalue1');
 INSERT INTO public.source_to_target_mapping (property_source, property_target) VALUES ('edmquantitativevalue2', 'eposquantitativevalue2');
+
+
+END;

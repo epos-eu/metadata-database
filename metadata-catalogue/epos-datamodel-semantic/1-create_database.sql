@@ -1,3 +1,5 @@
+\connect cerif;
+BEGIN;
 --
 -- Name: ontology; Type: TABLE; Schema: public; Owner: root
 --
@@ -146,3 +148,5 @@ ALTER TABLE ONLY public.source_to_target_mapping
 -- Name: source_to_target_mapping targetfk; Type: FK CONSTRAINT; Schema: public; Owner: root
 ALTER TABLE ONLY public.source_to_target_mapping
     ADD CONSTRAINT targetfk FOREIGN KEY (property_target) REFERENCES public.property(id);
+
+END;

@@ -1,0 +1,1 @@
+docker rm -f db-refactoring && docker rmi db-test && ./initdb.sh  && docker build -t db-test . && docker run -idt --name db-refactoring -p 5442:5432 -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=changeme -e POSTGRES_DB=postgres db-test &&  docker logs db-refactoring -f
