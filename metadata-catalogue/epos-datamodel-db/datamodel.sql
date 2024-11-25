@@ -799,6 +799,19 @@ CREATE TABLE IF NOT EXISTS public.softwareapplication
     FOREIGN KEY (version_id) REFERENCES public.versioningstatus (version_id) ON DELETE CASCADE
 );
 
+CREATE TABLE IF NOT EXISTS public.parameter
+(
+    instance_id character varying(100) NOT NULL,
+    meta_id character varying(100),
+    uid character varying(1024),
+    version_id character varying(100),
+    encodingformat character varying(1024),
+    conformsto character varying(1024),
+    action character varying(1024),
+    PRIMARY KEY (instance_id),
+    FOREIGN KEY (version_id) REFERENCES public.versioningstatus (version_id) ON DELETE CASCADE
+);
+
 CREATE TABLE IF NOT EXISTS public.softwareapplication_contactpoint
 (
     softwareapplication_instance_id character varying(100) NOT NULL,
@@ -819,16 +832,11 @@ CREATE TABLE IF NOT EXISTS public.softwareapplication_identifier
 
 CREATE TABLE IF NOT EXISTS public.softwareapplication_parameters
 (
-    instance_id character varying(100) NOT NULL,
-    meta_id character varying(100),
-    uid character varying(1024),
-    version_id character varying(100),
-    encodingformat character varying(1024),
-    conformsto character varying(1024),
-    action character varying(1024),
     softwareapplication_instance_id character varying(100) NOT NULL,
-    PRIMARY KEY (instance_id),
-    FOREIGN KEY (softwareapplication_instance_id) REFERENCES public.softwareapplication (instance_id) ON DELETE CASCADE
+    parameter_instance_id character varying(100) NOT NULL,
+    PRIMARY KEY (softwareapplication_instance_id,parameter_instance_id),
+    FOREIGN KEY (softwareapplication_instance_id) REFERENCES public.softwareapplication (instance_id) ON DELETE CASCADE,
+    FOREIGN KEY (parameter_instance_id) REFERENCES public.parameter (instance_id) ON DELETE CASCADE
 );
 
 
