@@ -16,7 +16,9 @@ CREATE TABLE plugin_relations (
 	id character varying(1024) NOT NULL PRIMARY KEY,
 	plugin_id character varying(1024) NOT NULL,
 	relation_id VARCHAR(1024) NOT NULL,
-	relation_type VARCHAR(1024) NOT NULL
+	relation_type VARCHAR(1024) NOT NULL,
+	input_format VARCHAR(1024) NOT NULL,
+	output_format VARCHAR(1024) NOT NULL
 );
 
 
