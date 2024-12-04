@@ -30,9 +30,6 @@ cat  $x >> $INITCERIF/$((COUNT))_${x##*/}
 done
 COUNT=$((COUNT + 1))
 
-echo ${ADMIN_REFACTORING_INSERT} > $INITCERIF/$((COUNT))_admins.sql
-COUNT=$((COUNT + 1))
-
 for x in metadata-catalogue/postgis-setting/*; do
 echo "\connect metadata_catalogue;" > $INITCERIF/$((COUNT))_${x##*/}
 cat  $x >> $INITCERIF/$((COUNT))_${x##*/}
