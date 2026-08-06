@@ -41,8 +41,11 @@ CREATE TABLE IF NOT EXISTS usergroup_catalogue.authorization_group
     FOREIGN KEY (meta_id) REFERENCES metadata_catalogue.edm_entity_id (meta_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
+ALTER TABLE usergroup_catalogue.metadata_group
+ADD CONSTRAINT metadata_group_name_key UNIQUE (name);
+
 INSERT INTO usergroup_catalogue.metadata_group (id, name, description)
-VALUES
-    (uuid_generate_v4(), 'ALL', 'Basic group');
+VALUES (uuid_generate_v4(), 'ALL', 'Basic group')
+ON CONFLICT (name) DO NOTHING;
 
 END;
